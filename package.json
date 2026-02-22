@@ -3,19 +3,13 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-<<<<<<< HEAD
   "scripts": {
     "build": "vite build",
     "dev": "vite"
   },
   "dependencies": {
-=======
-"scripts": {
-  "build": "vite build",
-  "dev": "vite"
-},
-"dependencies": {
->>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
+    "@capacitor/cli": "^8.1.0",
+    "@capacitor/core": "^8.1.0",
     "@emotion/react": "11.14.0",
     "@emotion/styled": "11.14.1",
     "@mui/icons-material": "7.3.5",
@@ -64,33 +58,20 @@
     "react-popper": "2.3.0",
     "react-resizable-panels": "2.1.7",
     "react-responsive-masonry": "2.7.1",
-<<<<<<< HEAD
     "react-router": "6.28.0",
     "react-router-dom": "6.28.0",
-=======
-    "react-router": "7.13.0",
->>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
     "react-slick": "0.31.0",
     "recharts": "2.15.2",
     "sonner": "2.0.3",
     "tailwind-merge": "3.2.0",
     "tw-animate-css": "1.3.8",
-<<<<<<< HEAD
     "vaul": "1.1.2"
-=======
-    "vaul": "1.1.2",
-    "vite": "6.3.5"
->>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
   },
   "devDependencies": {
     "@tailwindcss/vite": "4.1.12",
     "@vitejs/plugin-react": "4.7.0",
-<<<<<<< HEAD
     "tailwindcss": "4.1.12",
     "vite": "6.3.5"
-=======
-    "tailwindcss": "4.1.12"
->>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
   },
   "peerDependencies": {
     "react": "18.3.1",
