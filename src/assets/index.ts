@@ -33,3 +33,4 @@ export {
   img8,
   welcome_png_png,
 };
+

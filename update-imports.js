@@ -36,3 +36,4 @@ function walkDir(dir) {
 const srcDir = path.join(__dirname, 'src');
 const count = walkDir(srcDir);
 console.log(`\nTotal files updated: ${count}`);
+

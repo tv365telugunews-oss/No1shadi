@@ -233,32 +233,5 @@ export default function TermsAndConditions() {
             <div className="bg-[#FFF8E7] rounded-xl p-4 border border-[#D4AF37]/30">
               <p className="text-[#004953] mb-2"><strong>No1 shadi.com – Safe & Secure</strong></p>
               <p className="text-[#004953] text-sm">Contact Person: Kasturi Gopala Krishna</p>
-<<<<<<< HEAD
               <p className="text-[#004953] text-sm">Phone: +91 9100810606</p>
-=======
-              <p className="text-[#004953] text-sm">Phone: +91 9849884466</p>
->>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
-              <p className="text-[#004953] text-sm">Email: no1shadi.com@gmail.com</p>
-              <p className="text-[#004953] text-sm">Address: Hyderabad, Telangana, India</p>
-              <p className="text-[#004953] text-sm mt-2">Customer Support: Available 24/7</p>
-            </div>
-          </section>
 
-          {/* Acknowledgment */}
-          <section className="border-t-2 border-[#D4AF37]/20 pt-6">
-            <div className="bg-gradient-to-br from-[#7B1E3A] to-[#C41E3A] text-white rounded-xl p-6 text-center">
-              <p className="font-semibold mb-2">
-                By using No1 shadi.com, you acknowledge that you have read and understood these Terms and Conditions and agree to be bound by them.
-              </p>
-              <p className="text-sm text-white/80">
-                Thank you for choosing No1 shadi.com for your matrimonial journey.
-              </p>
-            </div>
-          </section>
-        </div>
-      </div>
-
-      <BottomNav />
-    </div>
-  );
-}

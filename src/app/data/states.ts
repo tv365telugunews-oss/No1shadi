@@ -50,3 +50,4 @@ export const getStateDisplayName = (state: string): string => {
 export const getStateValue = (state: string): string => {
   return state.toLowerCase().replace(/\s+/g, '-');
 };
+

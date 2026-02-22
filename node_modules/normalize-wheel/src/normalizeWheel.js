@@ -179,3 +179,4 @@ normalizeWheel.getEventType = function() /*string*/ {
 };
 
 module.exports = normalizeWheel;
+

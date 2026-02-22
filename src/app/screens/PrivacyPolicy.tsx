@@ -383,32 +383,5 @@ export default function PrivacyPolicy() {
               <p className="text-[#004953] mb-2"><strong>Privacy Officer – No1 shadi.com</strong></p>
               <p className="text-[#004953] text-sm">Contact Person: Kasturi Gopala Krishna</p>
               <p className="text-[#004953] text-sm">Email: no1shadi.com@gmail.com</p>
-<<<<<<< HEAD
               <p className="text-[#004953] text-sm">Phone: +91 9100810606</p>
-=======
-              <p className="text-[#004953] text-sm">Phone: +91 9849884466</p>
->>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
-              <p className="text-[#004953] text-sm">Address: Hyderabad, Telangana, India</p>
-              <p className="text-[#004953] text-sm mt-2">Response Time: Within 48 hours</p>
-            </div>
-          </section>
 
-          {/* Acknowledgment */}
-          <section className="border-t-2 border-[#D4AF37]/20 pt-6">
-            <div className="bg-gradient-to-br from-[#7B1E3A] to-[#C41E3A] text-white rounded-xl p-6 text-center">
-              <Shield className="w-12 h-12 mx-auto mb-3" />
-              <p className="font-semibold mb-2">
-                Your privacy and security are our top priorities.
-              </p>
-              <p className="text-sm text-white/80">
-                We are committed to protecting your personal information and ensuring a safe matrimonial experience.
-              </p>
-            </div>
-          </section>
-        </div>
-      </div>
-
-      <BottomNav />
-    </div>
-  );
-}

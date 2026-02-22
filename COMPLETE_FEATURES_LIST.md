@@ -377,3 +377,4 @@ The app is now production-ready with:
 **Built with ❤️ for the Telugu Community**
 
 *Last Updated: February 21, 2026*
+

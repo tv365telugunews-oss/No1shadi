@@ -297,3 +297,4 @@ function DoshaItem({ name, userStatus, matchStatus, compatible }: DoshaItemProps
     </div>
   );
 }
+

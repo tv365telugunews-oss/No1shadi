@@ -241,3 +241,4 @@ function NavButton({ icon, label, active = false }: { icon: React.ReactNode; lab
     </button>
   );
 }
+

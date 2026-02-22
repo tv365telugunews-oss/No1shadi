@@ -28,3 +28,4 @@ done
 echo ""
 echo "Total files updated: $count"
 echo "Done! All react-router imports have been replaced with react-router-dom"
+

@@ -23,3 +23,4 @@ export const getReligionDisplayName = (religion: string): string => {
 export const getReligionValue = (religion: string): string => {
   return religion.toLowerCase().replace(/[ʼ\s\(\)]/g, '-').replace(/--+/g, '-');
 };
+

@@ -194,3 +194,4 @@ export function SubscriptionBlocker({ featureName }: { featureName?: string }) {
     </div>
   );
 }
+
