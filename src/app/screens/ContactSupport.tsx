@@ -145,4 +145,81 @@ export default function ContactSupport() {
             <div>
               <p className="font-semibold text-[#7B1E3A] text-sm">Phone</p>
               <p className="text-xs text-[#004953]/60">9100810606</p>
+            </div>
+          </a>
+
+        </div>
+
+        {/* Support Form */}
+        <div className="bg-white rounded-xl border-2 border-[#D4AF37] p-4 shadow-md">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <Input
+              placeholder="Your name"
+              value={formData.name}
+              onChange={(e: any) => setFormData({ ...formData, name: e.target.value })}
+            />
+            <Input
+              placeholder="Your email"
+              value={formData.email}
+              onChange={(e: any) => setFormData({ ...formData, email: e.target.value })}
+            />
+            <Input
+              placeholder="Phone (optional)"
+              value={formData.phone}
+              onChange={(e: any) => setFormData({ ...formData, phone: e.target.value })}
+            />
+            <Select onValueChange={(v) => setFormData({ ...formData, category: v })}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select issue category" />
+              </SelectTrigger>
+              <SelectContent>
+                {issueCategories.map((c) => (
+                  <SelectItem key={c} value={c}>{c}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <div className="mt-3">
+            <Input
+              placeholder="Subject"
+              value={formData.subject}
+              onChange={(e: any) => setFormData({ ...formData, subject: e.target.value })}
+            />
+            <Textarea
+              placeholder="Describe your issue"
+              value={formData.message}
+              onChange={(e: any) => setFormData({ ...formData, message: e.target.value })}
+              className="mt-2"
+            />
+          </div>
+
+          <div className="mt-4 flex items-center gap-3">
+            <Button onClick={handleSubmit} className="flex items-center gap-2">
+              <Send className="w-4 h-4" />
+              Send Request
+            </Button>
+            <Button variant="outline" onClick={() => navigate(-1)}>
+              Cancel
+            </Button>
+          </div>
+        </div>
+
+        {/* Success Dialog */}
+        {showSuccessDialog && (
+          <AlertDialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Request Sent</AlertDialogTitle>
+                <AlertDialogDescription>Your request has been submitted. Our team will contact you shortly.</AlertDialogDescription>
+              </AlertDialogHeader>
+            </AlertDialogContent>
+          </AlertDialog>
+        )}
+
+      </div>
+    </div>
+  );
+}
+
 

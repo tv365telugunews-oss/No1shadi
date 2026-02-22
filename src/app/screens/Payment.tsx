@@ -40,4 +40,57 @@ export default function Payment() {
   const gstAmount = Math.round(planPrice * gstRate);
   const totalAmount = planPrice + gstAmount;
 
+  const handleConfirm = async () => {
+    if (!selectedPlan) return;
+    // Simulate creating subscription
+    try {
+      await createSubscription({ planId: selectedPlan.id, amount: totalAmount });
+      setShowSuccess(true);
+      setTimeout(() => navigate('/subscription'), 1500);
+    } catch (err) {
+      console.error(err);
+      alert('Payment failed. Please try again.');
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#FFF8E7] mandala-bg p-6">
+      <div className="max-w-md mx-auto bg-white rounded-2xl p-6 shadow">
+        <button onClick={() => navigate(-1)} className="mb-4 text-sm text-[#7B1E3A]">Back</button>
+        <h2 className="text-xl font-bold text-[#7B1E3A] mb-2">Confirm Payment</h2>
+        {selectedPlan && (
+          <div className="mb-4">
+            <p className="font-semibold">{selectedPlan.name} • {selectedPlan.duration}</p>
+            <p className="text-sm text-[#004953]/60">Price: {selectedPlan.price}</p>
+            <p className="text-sm text-[#004953]/60">GST (18%): ₹{gstAmount}</p>
+            <p className="text-lg font-bold mt-2">Total: ₹{totalAmount}</p>
+          </div>
+        )}
+
+        <div className="space-y-3 mb-4">
+          <label className="flex items-center gap-2">
+            <input type="radio" checked={selectedMethod === 'upi'} onChange={() => setSelectedMethod('upi')} />
+            <span>UPI</span>
+          </label>
+          <label className="flex items-center gap-2">
+            <input type="radio" checked={selectedMethod === 'card'} onChange={() => setSelectedMethod('card')} />
+            <span>Card</span>
+          </label>
+          <label className="flex items-center gap-2">
+            <input type="radio" checked={selectedMethod === 'wallet'} onChange={() => setSelectedMethod('wallet')} />
+            <span>Wallet</span>
+          </label>
+        </div>
+
+        <Button onClick={handleConfirm} className="w-full">Pay ₹{totalAmount}</Button>
+
+        {showSuccess && (
+          <div className="mt-4 text-center text-green-600">Payment successful! Redirecting...</div>
+        )}
+      </div>
+    </div>
+  );
+
+}
+
 

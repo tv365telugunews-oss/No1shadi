@@ -384,4 +384,13 @@ export default function PrivacyPolicy() {
               <p className="text-[#004953] text-sm">Contact Person: Kasturi Gopala Krishna</p>
               <p className="text-[#004953] text-sm">Email: no1shadi.com@gmail.com</p>
               <p className="text-[#004953] text-sm">Phone: +91 9100810606</p>
+            </div>
+          </section>
+
+        </div>
+      </div>
+      <BottomNav />
+    </div>
+  );
+}
 

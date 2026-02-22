@@ -1,8 +1,18 @@
-import { useState } from "react";
-import { useParams, useNavigate } from "react-router";
-import { ArrowLeft, Heart, X, MessageCircle, Phone, Video, Info, MapPin, Briefcase, GraduationCap, Users, Home, Sparkles, ShieldCheck, Share2, Star, MoreVertical, CheckCircle, Shield } from "lucide-react";
-import { mockProfiles } from "../data/mockData";
-import { Button } from "../components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
-import { motion } from "motion/react";
+
+import { useNavigate, useParams } from "react-router";
+
+export default function ProfileDetail() {
+	const navigate = useNavigate();
+	const params = useParams();
+
+	return (
+		<div className="min-h-screen p-6 bg-[#FFF8E7]">
+			<div className="max-w-2xl mx-auto bg-white p-6 rounded-2xl">
+				<button onClick={() => navigate(-1)} className="mb-4 text-sm">Back</button>
+				<h2 className="text-xl font-bold">Profile {params.id}</h2>
+				<p className="text-sm text-[#004953]/60">Profile details placeholder</p>
+			</div>
+		</div>
+	);
+}
 

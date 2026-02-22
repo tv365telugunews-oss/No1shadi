@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
-import { Check, Crown, Star, Sparkles, ChevronLeft } from "lucide-react";
+import { Check, Crown, Sparkles, ChevronLeft } from "lucide-react";
 import { subscriptionPlans } from "../data/mockData";
 import { Button } from "../components/ui/button";
 
@@ -9,7 +9,6 @@ export default function Subscription() {
 
   return (
     <div className="min-h-screen bg-[#FFF8E7] mandala-bg pb-6">
-      {/* Header */}
       <div className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm border-b border-[#D4AF37]/20 p-4">
         <div className="flex items-center gap-3">
           <button onClick={() => navigate(-1)} className="p-2 hover:bg-[#FFF8E7] rounded-lg transition-colors">
@@ -24,19 +23,7 @@ export default function Subscription() {
         </div>
       </div>
 
-      {/* Benefits Banner */}
       <div className="p-6 m-4 rounded-2xl bg-gradient-to-r from-[#7B1E3A] to-[#A0002A] text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="premium-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                <circle cx="20" cy="20" r="1" fill="white" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#premium-pattern)" />
-          </svg>
-        </div>
-        
         <div className="relative z-10">
           <div className="flex items-center gap-2 mb-3">
             <Crown className="w-6 h-6 text-[#F4C430]" />
@@ -53,14 +40,12 @@ export default function Subscription() {
         </div>
       </div>
 
-      {/* Subscription Plans */}
       <div className="px-4 space-y-4">
         {subscriptionPlans.map((plan, index) => (
           <PlanCard key={plan.id} plan={plan} index={index} />
         ))}
       </div>
 
-      {/* Trust Badges */}
       <div className="mt-8 px-4">
         <div className="p-6 rounded-2xl bg-white border border-[#D4AF37]/20">
           <div className="flex items-center justify-center gap-8">
@@ -92,7 +77,6 @@ export default function Subscription() {
         </div>
       </div>
 
-      {/* Contact Support */}
       <div className="mt-6 text-center px-4">
         <p className="text-sm text-[#004953]/60 mb-2">
           Need help choosing the right plan?
@@ -120,6 +104,64 @@ function PlanCard({ plan, index }: PlanCardProps) {
 
   const handleSubscribe = () => {
     if (isCustomPricing) {
-      // Show contact form or call support
       window.location.href = "tel:+919100810606";
+    } else {
+      alert(`Proceeding to subscribe to ${plan.name} for ${plan.price}`);
+    }
+  };
 
+  return (
+    <div className="p-4">
+      <div className={`rounded-2xl border-2 p-4 bg-white ${plan.popular ? 'ring-2 ring-[#D4AF37]/30' : ''}`}>
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <h4 className="font-bold text-lg text-[#7B1E3A]">{plan.name}</h4>
+            <p className="text-sm text-[#004953]/60">{plan.duration}</p>
+          </div>
+          <div className="text-right">
+            <div className="text-xl font-bold text-[#7B1E3A]">{plan.price}</div>
+            {plan.originalPrice && (
+              <div className="text-xs line-through text-[#004953]/50">{plan.originalPrice}</div>
+            )}
+            {plan.discount && (
+              <div className="text-xs text-[#D4AF37] font-semibold">{plan.discount}</div>
+            )}
+          </div>
+        </div>
+
+        <ul className="mb-4 space-y-2">
+          {plan.features.map((f) => (
+            <li key={f} className="flex items-center gap-2 text-sm text-[#004953]">
+              <Check className="w-4 h-4 text-[#D4AF37]" />
+              <span>{f}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleSubscribe}
+            className="flex-1 h-10 rounded-lg bg-[#7B1E3A] text-white font-semibold hover:bg-[#A0002A] transition-colors"
+          >
+            {isCustomPricing ? 'Contact Us' : `Subscribe - ${plan.price}`}
+          </button>
+          <button
+            onClick={() => navigate(-1)}
+            className="h-10 px-3 rounded-lg border border-[#D4AF37] text-[#7B1E3A] hover:bg-[#D4AF37]/10"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BenefitItem({ text }: { text: string }) {
+  return (
+    <div className="flex items-center gap-2 bg-white/10 rounded-md px-3 py-2">
+      <Sparkles className="w-4 h-4 text-white" />
+      <span className="text-sm text-white">{text}</span>
+    </div>
+  );
+}

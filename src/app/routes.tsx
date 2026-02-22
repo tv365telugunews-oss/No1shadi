@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter } from "react-router-dom";
 
 import Welcome from "./screens/Welcome";
 import Login from "./screens/Login";
@@ -22,7 +22,6 @@ import TermsAndConditions from "./screens/TermsAndConditions";
 import PrivacyPolicy from "./screens/PrivacyPolicy";
 import LegalDisclaimer from "./screens/LegalDisclaimer";
 import Language from "./screens/Language";
-import BlockedUsers from "./screens/BlockedUsers";
 import ChangePassword from "./screens/ChangePassword";
 import HelpFAQ from "./screens/HelpFAQ";
 import ContactSupport from "./screens/ContactSupport";
@@ -100,7 +99,7 @@ export const router = createBrowserRouter([
   { path: "/privacy", Component: PrivacyPolicy },
   { path: "/disclaimer", Component: LegalDisclaimer },
   { path: "/language", Component: Language },
-  { path: "/blocked-users", Component: BlockedUsers },
+  { path: "/blocked-users", lazy: async () => { const m = await import("./screens/BlockedUsers"); return { Component: (m && (m as any).default) ? (m as any).default : ((m && (m as any).BlockedUsers) ? (m as any).BlockedUsers : m) }; } },
   { path: "/change-password", Component: ChangePassword },
   { path: "/help-faq", Component: HelpFAQ },
   { path: "/contact-support", Component: ContactSupport },

@@ -234,4 +234,13 @@ export default function TermsAndConditions() {
               <p className="text-[#004953] mb-2"><strong>No1 shadi.com – Safe & Secure</strong></p>
               <p className="text-[#004953] text-sm">Contact Person: Kasturi Gopala Krishna</p>
               <p className="text-[#004953] text-sm">Phone: +91 9100810606</p>
+            </div>
+          </section>
+
+        </div>
+      </div>
+      <BottomNav />
+    </div>
+  );
+}
 
