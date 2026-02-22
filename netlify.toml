@@ -1,0 +1,8 @@
+[build]
+  # Install devDependencies (ensures vite is available) and run Vite via Node
+  command = "npm ci --include=dev && node ./node_modules/vite/bin/vite.js build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+  

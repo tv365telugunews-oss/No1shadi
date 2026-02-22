@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { ArrowLeft, Heart, X, MessageCircle, Phone, Video, Info, MapPin, Briefcase, GraduationCap, Users, Home, Sparkles, ShieldCheck, Share2, Star, MoreVertical, CheckCircle, Shield } from "lucide-react";
@@ -5,6 +6,19 @@ import { mockProfiles } from "../data/mockData";
 import { Button } from "../components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 import { motion } from "motion/react";
+=======
+import { motion } from "motion/react";
+import { useParams, useNavigate } from "react-router";
+import { useState } from "react";
+import { 
+  ChevronLeft, Heart, MessageCircle, Phone, Video, Share2, MoreVertical,
+  CheckCircle, Star, Shield, MapPin, Briefcase, GraduationCap, Home as HomeIcon,
+  Users, Sparkles
+} from "lucide-react";
+import { mockProfiles } from "../data/mockData";
+import { Button } from "../components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
 
 export default function ProfileDetail() {
   const { id } = useParams();
@@ -31,7 +45,11 @@ export default function ProfileDetail() {
       <div className="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-[#D4AF37]/20 p-4">
         <div className="flex items-center justify-between">
           <button onClick={() => navigate(-1)} className="p-2 hover:bg-[#FFF8E7] rounded-lg transition-colors">
+<<<<<<< HEAD
             <ArrowLeft className="w-6 h-6 text-[#7B1E3A]" />
+=======
+            <ChevronLeft className="w-6 h-6 text-[#7B1E3A]" />
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           </button>
           <h2 className="text-lg font-bold text-[#7B1E3A]" style={{ fontFamily: "var(--font-heading)" }}>
             Profile Details
@@ -176,7 +194,11 @@ export default function ProfileDetail() {
 
           <TabsContent value="family" className="space-y-4">
             {profile.familyDetails && (
+<<<<<<< HEAD
               <InfoCard title="Family Details" icon={<Home className="w-5 h-5" />}>
+=======
+              <InfoCard title="Family Details" icon={<HomeIcon className="w-5 h-5" />}>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
                 <InfoRow label="Father's Occupation" value={profile.familyDetails.fatherOccupation} />
                 <InfoRow label="Mother's Occupation" value={profile.familyDetails.motherOccupation} />
                 <InfoRow label="Siblings" value={profile.familyDetails.siblings} />

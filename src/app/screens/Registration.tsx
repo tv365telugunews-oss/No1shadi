@@ -1,17 +1,31 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
 import { ArrowLeft, ArrowRight, User, Calendar, MapPin, Ruler, Heart, GraduationCap, Briefcase, DollarSign } from "lucide-react";
+=======
+import { motion } from "motion/react";
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
+import { Progress } from "../components/ui/progress";
+import { ChevronLeft, ChevronRight, CheckCircle2 } from "lucide-react";
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
 import { teluguCastes, getCasteDisplayName, getCasteValue } from "../data/castes";
 import { indianStates, getStateDisplayName, getStateValue } from "../data/states";
 import { indianReligions, getReligionDisplayName, getReligionValue } from "../data/religions";
 import { educationCourses, getEducationDisplayName, getEducationValue } from "../data/education";
 import { rashis, getRashiDisplayName, getRashiValue, nakshatrams, getNakshatramDisplayName, getNakshatramValue, gothrams, getGothramDisplayName, getGothramValue, doshams, getDoshamDisplayName, getDoshamValue } from "../data/astrology";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "../components/ui/alert-dialog";
+<<<<<<< HEAD
 import { Progress } from "../components/ui/progress";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../components/ui/select";
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
 
 export default function Registration() {
   const navigate = useNavigate();
@@ -28,9 +42,12 @@ export default function Registration() {
     // Step 1: Basic Details
     fullName: "",
     dateOfBirth: "",
+<<<<<<< HEAD
     dobDay: "",
     dobMonth: "",
     dobYear: "",
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
     height: "",
     maritalStatus: "",
     religion: "",
@@ -53,10 +70,13 @@ export default function Registration() {
     // Step 4: Family
     fatherOccupation: "",
     motherOccupation: "",
+<<<<<<< HEAD
     numberOfBrothers: "",
     brothersMarried: "",
     numberOfSisters: "",
     sistersMarried: "",
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
     familyType: "",
     familyValues: "",
     
@@ -65,7 +85,10 @@ export default function Registration() {
     smoking: "",
     drinking: "",
     motherTongue: "",
+<<<<<<< HEAD
     hobbies: "",
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
   });
 
   const validateCurrentStep = (): boolean => {
@@ -82,8 +105,13 @@ export default function Registration() {
           alert("Please enter your full name");
           return false;
         }
+<<<<<<< HEAD
         if (!formData.dobDay || !formData.dobMonth || !formData.dobYear) {
           alert("Please enter your complete date of birth");
+=======
+        if (!formData.dateOfBirth) {
+          alert("Please select your date of birth");
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           return false;
         }
         if (!formData.height) {
@@ -211,7 +239,11 @@ export default function Registration() {
       <div className="bg-white shadow-sm border-b border-[#D4AF37]/20 p-4">
         <div className="flex items-center gap-3 mb-3">
           <button onClick={handleBack} className="p-2 hover:bg-[#FFF8E7] rounded-lg transition-colors">
+<<<<<<< HEAD
             <ArrowLeft className="w-6 h-6 text-[#7B1E3A]" />
+=======
+            <ChevronLeft className="w-6 h-6 text-[#7B1E3A]" />
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           </button>
           <div className="flex-1">
             <h2 className="text-lg font-bold text-[#7B1E3A]" style={{ fontFamily: "var(--font-heading)" }}>
@@ -238,7 +270,11 @@ export default function Registration() {
           {currentStep === 3 && <Step3Education formData={formData} setFormData={setFormData} />}
           {currentStep === 4 && <Step4Family formData={formData} setFormData={setFormData} />}
           {currentStep === 5 && <Step5Lifestyle formData={formData} setFormData={setFormData} />}
+<<<<<<< HEAD
           {currentStep === 6 && <Step6Photos navigate={navigate} />}
+=======
+          {currentStep === 6 && <Step6Photos />}
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
         </motion.div>
       </div>
 
@@ -254,7 +290,11 @@ export default function Registration() {
           }}
         >
           {currentStep === totalSteps - 1 ? "Complete Registration" : "Continue"}
+<<<<<<< HEAD
           <ArrowRight className="w-5 h-5 ml-2" />
+=======
+          <ChevronRight className="w-5 h-5 ml-2" />
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
         </Button>
       </div>
 
@@ -265,7 +305,11 @@ export default function Registration() {
             <AlertDialogHeader>
               <div className="flex justify-center mb-4">
                 <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#7B1E3A] to-[#A0002A] flex items-center justify-center">
+<<<<<<< HEAD
                   <User className="w-12 h-12 text-white" />
+=======
+                  <CheckCircle2 className="w-12 h-12 text-white" />
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
                 </div>
               </div>
               <AlertDialogTitle className="text-2xl font-bold text-[#7B1E3A] text-center" style={{ fontFamily: "var(--font-heading)" }}>
@@ -354,6 +398,7 @@ function Step1BasicDetails({ formData, setFormData }: { formData: any, setFormDa
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <label className="text-sm font-semibold text-[#004953]">Date of Birth *</label>
+<<<<<<< HEAD
           <div className="grid grid-cols-3 gap-2">
             <Select onValueChange={(value) => setFormData({ ...formData, dobDay: value })}>
               <SelectTrigger className="h-12 rounded-xl border-[#D4AF37]/30 bg-white">
@@ -399,6 +444,14 @@ function Step1BasicDetails({ formData, setFormData }: { formData: any, setFormDa
               </SelectContent>
             </Select>
           </div>
+=======
+          <Input 
+            type="date" 
+            className="h-12 rounded-xl border-[#D4AF37]/30 bg-white" 
+            value={formData.dateOfBirth}
+            onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
+          />
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
         </div>
         <div className="space-y-2">
           <label className="text-sm font-semibold text-[#004953]">Height *</label>
@@ -744,9 +797,15 @@ function Step4Family({ formData, setFormData }: { formData: any, setFormData: an
       </div>
 
       <div className="space-y-2">
+<<<<<<< HEAD
         <label className="text-sm font-semibold text-[#004953]">Number of Brothers</label>
         <Select
           onValueChange={(value) => setFormData({ ...formData, numberOfBrothers: value })}
+=======
+        <label className="text-sm font-semibold text-[#004953]">Number of Siblings</label>
+        <Select
+          onValueChange={(value) => setFormData({ ...formData, numberOfSiblings: value })}
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
         >
           <SelectTrigger className="h-12 rounded-xl border-[#D4AF37]/30 bg-white">
             <SelectValue placeholder="Select" />
@@ -762,6 +821,7 @@ function Step4Family({ formData, setFormData }: { formData: any, setFormData: an
       </div>
 
       <div className="space-y-2">
+<<<<<<< HEAD
         <label className="text-sm font-semibold text-[#004953]">Brothers Married</label>
         <Select
           onValueChange={(value) => setFormData({ ...formData, brothersMarried: value })}
@@ -816,6 +876,8 @@ function Step4Family({ formData, setFormData }: { formData: any, setFormData: an
       </div>
 
       <div className="space-y-2">
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
         <label className="text-sm font-semibold text-[#004953]">Family Type *</label>
         <Select
           onValueChange={(value) => setFormData({ ...formData, familyType: value })}
@@ -934,7 +996,11 @@ function Step5Lifestyle({ formData, setFormData }: { formData: any, setFormData:
   );
 }
 
+<<<<<<< HEAD
 function Step6Photos({ navigate }: { navigate: any }) {
+=======
+function Step6Photos() {
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
   const [selectedPhoto, setSelectedPhoto] = useState<File | null>(null);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [showVerificationDialog, setShowVerificationDialog] = useState(false);
@@ -1148,7 +1214,11 @@ function Step6Photos({ navigate }: { navigate: any }) {
                 }}
                 onClick={() => {
                   setShowVerificationDialog(false);
+<<<<<<< HEAD
                   navigate('/profile-verification');
+=======
+                  alert("Verification process will be available after completing registration!");
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
                 }}
               >
                 Start Now
@@ -1186,7 +1256,11 @@ function Step6Photos({ navigate }: { navigate: any }) {
               <div className="bg-[#FFF8E7] border border-[#D4AF37]/30 rounded-xl p-4">
                 <p className="text-sm text-[#004953]">
                   <strong className="text-[#7B1E3A]">📧 Email:</strong> no1shadi.com@gmail.com<br/>
+<<<<<<< HEAD
                   <strong className="text-[#7B1E3A]">📞 Phone:</strong> +91 9100810606<br/>
+=======
+                  <strong className="text-[#7B1E3A]">📞 Phone:</strong> +91 9849884466<br/>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
                   <strong className="text-[#7B1E3A]">⏰ Hours:</strong> Mon-Sat, 9 AM - 6 PM
                 </p>
               </div>

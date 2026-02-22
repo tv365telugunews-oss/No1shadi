@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { Home, Search, Heart, MessageCircle, User } from "lucide-react";
@@ -5,11 +6,21 @@ import { Home, Search, Heart, MessageCircle, User } from "lucide-react";
 export function BottomNav() {
   const location = useLocation();
   const navigate = useNavigate();
+=======
+import { Home, Search, MessageCircle, User } from "lucide-react";
+import { Link, useLocation } from "react-router";
+
+export function BottomNav() {
+  const location = useLocation();
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
 
   const navItems = [
     { icon: Home, label: "Home", path: "/home" },
     { icon: Search, label: "Search", path: "/search" },
+<<<<<<< HEAD
     { icon: Heart, label: "Favorites", path: "/favorites" },
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
     { icon: MessageCircle, label: "Chat", path: "/chat" },
     { icon: User, label: "Profile", path: "/profile" }
   ];
@@ -26,9 +37,15 @@ export function BottomNav() {
           const Icon = item.icon;
 
           return (
+<<<<<<< HEAD
             <button
               key={item.path}
               onClick={() => navigate(item.path)}
+=======
+            <Link
+              key={item.path}
+              to={item.path}
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
               className="flex flex-col items-center gap-1 min-w-[60px]"
             >
               <div
@@ -47,10 +64,18 @@ export function BottomNav() {
               >
                 {item.label}
               </span>
+<<<<<<< HEAD
             </button>
+=======
+            </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           );
         })}
       </div>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883

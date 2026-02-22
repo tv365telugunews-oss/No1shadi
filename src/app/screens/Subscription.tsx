@@ -121,7 +121,11 @@ function PlanCard({ plan, index }: PlanCardProps) {
   const handleSubscribe = () => {
     if (isCustomPricing) {
       // Show contact form or call support
+<<<<<<< HEAD
       window.location.href = "tel:+919100810606";
+=======
+      alert("Please contact our support team for custom pricing");
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
     } else {
       // Save selected plan to localStorage for payment screen
       localStorage.setItem('selectedPlanForPayment', JSON.stringify({

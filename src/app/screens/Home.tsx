@@ -1,14 +1,23 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
 import { Bell, Search, SlidersHorizontal, Sparkles, MapPin, Shield, Heart, MessageCircle, Star, ShoppingBag, Calendar } from "lucide-react";
+=======
+import { motion } from "motion/react";
+import { Heart, Sparkles, Shield, CheckCircle, TrendingUp, Bell, Search } from "lucide-react";
+import { Link } from "react-router";
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
 import { mockProfiles } from "../data/mockData";
 import ProfileCard from "../components/ProfileCard";
 import { BottomNav } from "../components/BottomNav";
 import { SubscriptionReminder } from "../components/SubscriptionReminder";
 
 export default function Home() {
+<<<<<<< HEAD
   const navigate = useNavigate();
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
   const aiMatches = mockProfiles.filter(p => p.aiCompatibility >= 90);
   const recentlyJoined = mockProfiles.slice(0, 3);
   const premiumMatches = mockProfiles.filter(p => p.premium);
@@ -32,6 +41,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+<<<<<<< HEAD
             <button 
               onClick={() => navigate("/notifications")}
               className="p-2 rounded-full hover:bg-[#FFF8E7] transition-colors relative"
@@ -39,11 +49,23 @@ export default function Home() {
               <Bell className="w-6 h-6 text-[#7B1E3A]" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-[#A0002A] rounded-full"></span>
             </button>
+=======
+            <Link to="/notifications">
+              <button className="p-2 rounded-full hover:bg-[#FFF8E7] transition-colors relative">
+                <Bell className="w-6 h-6 text-[#7B1E3A]" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-[#A0002A] rounded-full"></span>
+              </button>
+            </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           </div>
         </div>
 
         {/* Search Bar */}
+<<<<<<< HEAD
         <div onClick={() => navigate("/search")} className="cursor-pointer">
+=======
+        <Link to="/search">
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           <div className="relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#004953]/40" />
             <input
@@ -58,7 +80,11 @@ export default function Home() {
               </svg>
             </button>
           </div>
+<<<<<<< HEAD
         </div>
+=======
+        </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
       </div>
 
       {/* Main Content */}
@@ -107,16 +133,25 @@ export default function Home() {
                 </div>
                 <p className="text-xs text-white/60 mt-1">90%+ Compatibility</p>
               </div>
+<<<<<<< HEAD
               <button 
                 onClick={() => navigate("/search")}
                 className="px-6 py-3 rounded-xl bg-[#D4AF37] text-[#7B1E3A] font-semibold hover:bg-[#F4C430] transition-colors"
               >
                 View All
               </button>
+=======
+              <Link to="/search">
+                <button className="px-6 py-3 rounded-xl bg-[#D4AF37] text-[#7B1E3A] font-semibold hover:bg-[#F4C430] transition-colors">
+                  View All
+                </button>
+              </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
             </div>
           </div>
         </motion.div>
 
+<<<<<<< HEAD
         {/* Quick Access - New Features */}
         <div>
           <h3 className="text-lg font-bold text-[#7B1E3A] mb-3" style={{ fontFamily: "var(--font-heading)" }}>
@@ -165,18 +200,26 @@ export default function Home() {
           </div>
         </div>
 
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
         {/* Daily Matches */}
         <div>
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-bold text-[#7B1E3A]" style={{ fontFamily: "var(--font-heading)" }}>
               Daily Matches
             </h3>
+<<<<<<< HEAD
             <span 
               onClick={() => navigate("/search")}
               className="text-sm font-semibold text-[#7B1E3A] cursor-pointer"
             >
               See All →
             </span>
+=======
+            <Link to="/search" className="text-sm font-semibold text-[#7B1E3A]">
+              See All →
+            </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           </div>
 
           <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
@@ -200,12 +243,18 @@ export default function Home() {
             <h3 className="text-xl font-bold text-[#7B1E3A]" style={{ fontFamily: "var(--font-heading)" }}>
               Recently Joined
             </h3>
+<<<<<<< HEAD
             <span 
               onClick={() => navigate("/search")}
               className="text-sm font-semibold text-[#7B1E3A] cursor-pointer"
             >
               See All →
             </span>
+=======
+            <Link to="/search" className="text-sm font-semibold text-[#7B1E3A]">
+              See All →
+            </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           </div>
 
           <div className="space-y-4">
@@ -240,6 +289,7 @@ export default function Home() {
 
           <div className="grid grid-cols-2 gap-4">
             {premiumMatches.slice(0, 2).map((profile) => (
+<<<<<<< HEAD
               <div 
                 key={profile.id} 
                 onClick={() => navigate(`/profile/${profile.id}`)}
@@ -272,6 +322,37 @@ export default function Home() {
           >
             Upgrade to Premium
           </button>
+=======
+              <Link key={profile.id} to={`/profile/${profile.id}`}>
+                <div className="group cursor-pointer">
+                  <div className="relative mb-2 overflow-hidden rounded-xl">
+                    <img
+                      src={profile.photo}
+                      alt={profile.name}
+                      className="w-full aspect-[3/4] object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute top-2 right-2 flex gap-1">
+                      <span className="px-2 py-1 rounded-full bg-white/90 backdrop-blur-sm text-xs font-semibold text-[#D4AF37] flex items-center gap-1">
+                        <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                  <h4 className="font-semibold text-[#004953] text-sm mb-1">{profile.name}</h4>
+                  <p className="text-xs text-[#004953]/60">{profile.profession}</p>
+                  <p className="text-xs text-[#004953]/60">{profile.location}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          <Link to="/subscription">
+            <button className="w-full mt-4 h-12 rounded-xl border-2 border-[#D4AF37] bg-white text-[#7B1E3A] font-semibold hover:bg-[#D4AF37] hover:text-white transition-colors">
+              Upgrade to Premium
+            </button>
+          </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
         </div>
       </div>
 

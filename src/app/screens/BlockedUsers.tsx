@@ -1,7 +1,12 @@
 import { useState } from "react";
+<<<<<<< HEAD
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
 import { ArrowLeft, UserX, Search, Trash2, Unlock } from "lucide-react";
+=======
+import { ArrowLeft, UserX, Unlock } from "lucide-react";
+import { useNavigate } from "react-router";
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
 import { Button } from "../components/ui/button";
 import { Avatar } from "../components/ui/avatar";
 import {
@@ -200,4 +205,8 @@ export default function BlockedUsers() {
       </AlertDialog>
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883

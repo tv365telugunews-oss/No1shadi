@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router";
 import { ArrowLeft, Mail, Lock, Eye, EyeOff, Heart, Phone, ArrowRight } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
+=======
+import { motion } from "motion/react";
+import { Heart, Mail, Phone, ArrowRight, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { Link, useNavigate } from "react-router";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { useState } from "react";
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
 
 type LoginMethod = "email" | "mobile" | "google" | null;
 
@@ -118,23 +127,38 @@ export default function Login() {
         <div className="text-center pt-6 pb-4">
           <p className="text-sm text-[#004953]/70">
             Don't have an account?{" "}
+<<<<<<< HEAD
             <span 
               onClick={() => navigate("/phone-number-entry")}
               className="font-semibold text-[#7B1E3A] cursor-pointer"
             >
               Register Now
             </span>
+=======
+            <Link to="/phone-number-entry" className="font-semibold text-[#7B1E3A]">
+              Register Now
+            </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           </p>
         </div>
 
         {/* Admin Access Link */}
         <div className="text-center pb-4">
+<<<<<<< HEAD
           <span 
             onClick={() => navigate("/admin/login")}
             className="text-xs text-[#004953]/40 hover:text-[#7B1E3A] transition-colors cursor-pointer"
           >
             Admin Access
           </span>
+=======
+          <Link 
+            to="/admin/login" 
+            className="text-xs text-[#004953]/40 hover:text-[#7B1E3A] transition-colors"
+          >
+            Admin Access
+          </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
         </div>
       </div>
     );
@@ -263,12 +287,21 @@ export default function Login() {
 
           {/* Admin Access Link */}
           <div className="text-center pt-4">
+<<<<<<< HEAD
             <span 
               onClick={() => navigate("/admin/login")}
               className="text-xs text-[#004953]/40 hover:text-[#7B1E3A] transition-colors cursor-pointer"
             >
               Admin Access
             </span>
+=======
+            <Link 
+              to="/admin/login" 
+              className="text-xs text-[#004953]/40 hover:text-[#7B1E3A] transition-colors"
+            >
+              Admin Access
+            </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           </div>
         </motion.div>
       </div>
@@ -422,12 +455,21 @@ export default function Login() {
 
           {/* Admin Access Link */}
           <div className="text-center pt-4">
+<<<<<<< HEAD
             <span 
               onClick={() => navigate("/admin/login")}
               className="text-xs text-[#004953]/40 hover:text-[#7B1E3A] transition-colors cursor-pointer"
             >
               Admin Access
             </span>
+=======
+            <Link 
+              to="/admin/login" 
+              className="text-xs text-[#004953]/40 hover:text-[#7B1E3A] transition-colors"
+            >
+              Admin Access
+            </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           </div>
         </motion.div>
       </div>
@@ -496,12 +538,21 @@ export default function Login() {
           
           {/* Admin Access Link */}
           <div className="mt-8">
+<<<<<<< HEAD
             <span 
               onClick={() => navigate("/admin/login")}
               className="text-xs text-[#004953]/40 hover:text-[#7B1E3A] transition-colors cursor-pointer"
             >
               Admin Access
             </span>
+=======
+            <Link 
+              to="/admin/login" 
+              className="text-xs text-[#004953]/40 hover:text-[#7B1E3A] transition-colors"
+            >
+              Admin Access
+            </Link>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
           </div>
         </motion.div>
       </div>

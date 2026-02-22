@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 💍 No1 Shadi.com - Safe & Secure
 
 > **Premium Telugu Matrimony & Wedding Ecosystem Platform**  
@@ -680,3 +681,16 @@ Proprietary - All rights reserved © 2026 No1 Shadi.com
 **Version:** 2.0.0  
 **Last Updated:** February 21, 2026  
 **Status:** Active Development 🚀
+=======
+
+  # New app creation
+
+  This is a code bundle for New app creation. The original project is available at https://www.figma.com/design/lFG6KcKq12vsL1jgrYBfpq/New-app-creation.
+
+  ## Running the code
+
+  Run `npm i` to install the dependencies.
+
+  Run `npm run dev` to start the development server.
+  
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883

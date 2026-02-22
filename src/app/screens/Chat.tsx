@@ -304,4 +304,8 @@ export default function Chat() {
       <BottomNav />
     </div>
   );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883

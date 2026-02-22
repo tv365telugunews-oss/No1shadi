@@ -233,7 +233,11 @@ export default function TermsAndConditions() {
             <div className="bg-[#FFF8E7] rounded-xl p-4 border border-[#D4AF37]/30">
               <p className="text-[#004953] mb-2"><strong>No1 shadi.com – Safe & Secure</strong></p>
               <p className="text-[#004953] text-sm">Contact Person: Kasturi Gopala Krishna</p>
+<<<<<<< HEAD
               <p className="text-[#004953] text-sm">Phone: +91 9100810606</p>
+=======
+              <p className="text-[#004953] text-sm">Phone: +91 9849884466</p>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
               <p className="text-[#004953] text-sm">Email: no1shadi.com@gmail.com</p>
               <p className="text-[#004953] text-sm">Address: Hyderabad, Telangana, India</p>
               <p className="text-[#004953] text-sm mt-2">Customer Support: Available 24/7</p>

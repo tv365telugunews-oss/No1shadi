@@ -136,6 +136,7 @@ export default function ContactSupport() {
           </a>
 
           <a
+<<<<<<< HEAD
             href="tel:+919100810606"
             className="bg-white rounded-xl border-2 border-[#D4AF37] p-4 flex items-center gap-3 hover:bg-[#FFF8E7] transition-colors shadow-md"
           >
@@ -145,6 +146,17 @@ export default function ContactSupport() {
             <div>
               <p className="font-semibold text-[#7B1E3A] text-sm">Phone</p>
               <p className="text-xs text-[#004953]/60">9100810606</p>
+=======
+            href="tel:+919849884466"
+            className="bg-white rounded-xl border-2 border-[#D4AF37] p-4 flex items-center gap-3 hover:bg-[#FFF8E7] transition-colors shadow-md"
+          >
+            <div className="p-3 bg-[#FFF8E7] rounded-full">
+              <Phone className="w-5 h-5 text-[#7B1E3A]" />
+            </div>
+            <div>
+              <p className="font-semibold text-[#7B1E3A] text-sm">Phone</p>
+              <p className="text-xs text-[#004953]/60">9849884466</p>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
             </div>
           </a>
 

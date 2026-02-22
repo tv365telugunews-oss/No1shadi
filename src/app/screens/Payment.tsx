@@ -28,6 +28,7 @@ export default function Payment() {
     }
   }, []);
 
+<<<<<<< HEAD
   // Helper function to extract numeric price
   const getNumericPrice = (priceString: string): number => {
     if (!priceString || priceString === "Contact Us") return 0;
@@ -40,6 +41,8 @@ export default function Payment() {
   const gstAmount = Math.round(planPrice * gstRate);
   const totalAmount = planPrice + gstAmount;
 
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
   const handlePayment = () => {
     // Create subscription when payment is successful
     if (selectedPlan) {
@@ -107,6 +110,7 @@ export default function Payment() {
           
           <div className="space-y-3 mb-4">
             <div className="flex justify-between">
+<<<<<<< HEAD
               <span className="text-[#004953]/70">{selectedPlan?.name || 'Gold'} Plan - {selectedPlan?.duration || '6 Months'}</span>
               <span className="font-semibold text-[#004953]">{selectedPlan?.price || '₹3,999'}</span>
             </div>
@@ -117,6 +121,22 @@ export default function Payment() {
             <div className="pt-3 border-t-2 border-[#D4AF37]/20 flex justify-between">
               <span className="text-lg font-bold text-[#7B1E3A]">Total Amount</span>
               <span className="text-2xl font-bold text-[#7B1E3A]">₹{totalAmount.toLocaleString('en-IN')}</span>
+=======
+              <span className="text-[#004953]/70">Gold Plan - 6 Months</span>
+              <span className="font-semibold text-[#004953]">₹3,999</span>
+            </div>
+            <div className="flex justify-between text-[#D4AF37]">
+              <span>Discount (43% OFF)</span>
+              <span className="font-semibold">-₹3,000</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-[#004953]/70">GST (18%)</span>
+              <span className="font-semibold text-[#004953]">₹720</span>
+            </div>
+            <div className="pt-3 border-t-2 border-[#D4AF37]/20 flex justify-between">
+              <span className="text-lg font-bold text-[#7B1E3A]">Total Amount</span>
+              <span className="text-2xl font-bold text-[#7B1E3A]">₹4,719</span>
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
             </div>
           </div>
 
@@ -272,7 +292,11 @@ export default function Payment() {
             boxShadow: "0 4px 16px rgba(123, 30, 58, 0.3)"
           }}
         >
+<<<<<<< HEAD
           Pay ₹{totalAmount.toLocaleString('en-IN')}
+=======
+          Pay ₹4,719
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
         </Button>
 
         {/* Terms */}

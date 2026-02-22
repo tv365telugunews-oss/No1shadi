@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { createMemoryRouter } from "react-router";
+=======
+import { createBrowserRouter } from "react-router";
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
 import Welcome from "./screens/Welcome";
 import Login from "./screens/Login";
 import WelcomeBack from "./screens/WelcomeBack";
@@ -14,7 +18,10 @@ import Settings from "./screens/Settings";
 import Payment from "./screens/Payment";
 import Chat from "./screens/Chat";
 import Profile from "./screens/Profile";
+<<<<<<< HEAD
 import Favorites from "./screens/Favorites";
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
 import Notifications from "./screens/Notifications";
 import EditProfile from "./screens/EditProfile";
 import TermsAndConditions from "./screens/TermsAndConditions";
@@ -29,6 +36,7 @@ import Hobbies from "./screens/Hobbies";
 import ProfileVerification from "./screens/ProfileVerification";
 import EatingHabits from "./screens/EatingHabits";
 import EducationDetails from "./screens/EducationDetails";
+<<<<<<< HEAD
 
 // Phase 1 Advanced Features
 import HoroscopeMatching from "./screens/HoroscopeMatching";
@@ -48,6 +56,8 @@ import BudgetManager from "./screens/BudgetManager";
 import GuestManager from "./screens/GuestManager";
 
 // Admin Routes
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
 import AdminLogin from "./screens/admin/AdminLogin";
 import AdminDashboard from "./screens/admin/AdminDashboard";
 import UserManagement from "./screens/admin/UserManagement";
@@ -58,6 +68,7 @@ import SupportTickets from "./screens/admin/SupportTickets";
 import ContentManagement from "./screens/admin/ContentManagement";
 import AdminSettings from "./screens/admin/AdminSettings";
 
+<<<<<<< HEAD
 // 404 Not Found Component
 function NotFound() {
   return (
@@ -75,6 +86,9 @@ function NotFound() {
 
 export const router = createMemoryRouter(
   [
+=======
+export const router = createBrowserRouter([
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
   {
     path: "/",
     Component: Welcome,
@@ -136,10 +150,13 @@ export const router = createMemoryRouter(
     Component: Profile,
   },
   {
+<<<<<<< HEAD
     path: "/favorites",
     Component: Favorites,
   },
   {
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
     path: "/notifications",
     Component: Notifications,
   },
@@ -195,6 +212,7 @@ export const router = createMemoryRouter(
     path: "/education-details",
     Component: EducationDetails,
   },
+<<<<<<< HEAD
   // Phase 1 Advanced Features
   {
     path: "/horoscope-matching",
@@ -242,6 +260,8 @@ export const router = createMemoryRouter(
     path: "/guest-manager",
     Component: GuestManager,
   },
+=======
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
   // Admin Routes
   {
     path: "/admin/login",
@@ -252,6 +272,7 @@ export const router = createMemoryRouter(
     Component: AdminDashboard,
   },
   {
+<<<<<<< HEAD
     path: "/admin/user-management",
     Component: UserManagement,
   },
@@ -261,6 +282,17 @@ export const router = createMemoryRouter(
   },
   {
     path: "/admin/subscription-management",
+=======
+    path: "/admin/users",
+    Component: UserManagement,
+  },
+  {
+    path: "/admin/verifications",
+    Component: VerificationQueue,
+  },
+  {
+    path: "/admin/subscriptions",
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
     Component: SubscriptionManagement,
   },
   {
@@ -268,17 +300,26 @@ export const router = createMemoryRouter(
     Component: Analytics,
   },
   {
+<<<<<<< HEAD
     path: "/admin/support-tickets",
     Component: SupportTickets,
   },
   {
     path: "/admin/content-management",
+=======
+    path: "/admin/support",
+    Component: SupportTickets,
+  },
+  {
+    path: "/admin/content",
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
     Component: ContentManagement,
   },
   {
     path: "/admin/settings",
     Component: AdminSettings,
   },
+<<<<<<< HEAD
   // 404 Not Found
   {
     path: "*",
@@ -294,3 +335,6 @@ export const router = createMemoryRouter(
     v7_skipActionErrorRevalidation: true,
   },
 });
+=======
+]);
+>>>>>>> ad230b081e0a7eee68afbde3f69aebfe9320f883
