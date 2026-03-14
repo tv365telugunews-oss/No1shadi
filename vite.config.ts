@@ -16,8 +16,16 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  optimizeDeps: {
+    include: ['react-router', 'react-router-dom'],
+  },
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
+  build: {
+    commonjsOptions: {
+      include: [/node_modules/, /react-router/],
+    },
+  },
 })
 
