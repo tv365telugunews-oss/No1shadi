@@ -15,7 +15,7 @@ export default defineConfig({
       // Alias @ to the src directory
       '@': path.resolve(__dirname, './src'),
       // Redirect any accidental imports of `react-router` to `react-router-dom`
-      'react-router': 'react-router-dom',
+      'react-router': path.resolve(__dirname, './node_modules/react-router-dom'),
     },
   },
 
