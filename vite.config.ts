@@ -9,8 +9,12 @@ export default defineConfig({
     // Tailwind is not being actively used – do not remove them
     react(),
     tailwindcss(),
-      { find: 'react-router', replacement: 'react-router-dom' },
-      'react-router-dom': path.resolve(__dirname, './node_modules/react-router-dom/esm/react-router-dom.js'),
+  ],
+
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      'react-router': 'react-router-dom',
     },
   },
 
