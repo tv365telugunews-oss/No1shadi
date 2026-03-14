@@ -4,8 +4,11 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "npx vite build",
+    "build": "npm install --include=dev && npx vite build",
     "dev": "vite"
+  },
+  "engines": {
+    "node": "20.x"
   },
   "dependencies": {
     "@capacitor/android": "^8.1.0",
