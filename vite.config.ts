@@ -14,8 +14,10 @@ export default defineConfig({
     alias: {
       // Alias @ to the src directory
       '@': path.resolve(__dirname, './src'),
-      // Redirect any accidental imports of `react-router` to `react-router-dom`
-      'react-router': path.resolve(__dirname, './node_modules/react-router-dom'),
+      // Redirect any accidental imports of `react-router` to the ESM build
+      // of `react-router-dom` to avoid Rollup/CommonJS export resolution issues
+      'react-router': path.resolve(__dirname, './node_modules/react-router-dom/esm/react-router-dom.js'),
+      'react-router-dom': path.resolve(__dirname, './node_modules/react-router-dom/esm/react-router-dom.js'),
     },
   },
 
