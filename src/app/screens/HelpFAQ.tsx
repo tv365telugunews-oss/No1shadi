@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, ChevronDown, Search } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Input } from "../components/ui/input";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../components/ui/accordion";
 

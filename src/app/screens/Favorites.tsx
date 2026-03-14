@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Heart, Star, MapPin, Briefcase, GraduationCap, Calendar, X } from "lucide-react";
 import { BottomNav } from "../components/BottomNav";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 export default function Favorites() {
   const navigate = useNavigate();

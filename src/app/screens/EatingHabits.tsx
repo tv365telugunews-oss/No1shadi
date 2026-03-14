@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, UtensilsCrossed, Check } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "../components/ui/alert-dialog";
 

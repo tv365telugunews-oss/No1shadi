@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { ArrowLeft, Save, CheckCircle, Camera, X, Check, Plus, Trash2, Shield } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Cropper from "react-easy-crop";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";

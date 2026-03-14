@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, Send, MoreVertical, Phone, Video, Image as ImageIcon, Smile } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { BottomNav } from "../components/BottomNav";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";

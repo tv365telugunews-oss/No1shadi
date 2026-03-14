@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, Music, BookOpen, Film, Dumbbell, UtensilsCrossed, ChevronDown, ChevronUp } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 
 export default function Hobbies() {

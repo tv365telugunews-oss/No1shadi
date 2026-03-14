@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Search as SearchIcon } from "lucide-react";
 
 export default function Home() {
