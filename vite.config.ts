@@ -14,14 +14,13 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      'react-router': 'react-router-dom',
     },
   },
 
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
   optimizeDeps: {
-    include: ['react-router-dom', 'react-router-dom/dist/index.js'],
+    include: ['react-router-dom'],
   },
 
   build: {
