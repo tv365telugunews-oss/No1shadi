@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "build": "npm install --include=dev && node ./node_modules/vite/bin/vite.js build --debug",
+    "build": "node ./node_modules/vite/bin/vite.js build --debug",
     "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "dev:frontend": "vite",
     "dev:backend": "npm run dev --prefix backend",
