@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Users, Lock, Mail, Shield } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
+import { loginParent, saveAuthSession } from "../config/api";
 
 export default function ParentLogin() {
   const navigate = useNavigate();
@@ -10,11 +11,25 @@ export default function ParentLogin() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleLogin = () => {
-    // In real app, authenticate parent account
-    localStorage.setItem("userRole", "parent");
-    navigate("/parent-dashboard");
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      const session = await loginParent({
+        email: loginMethod === "email" ? email : undefined,
+        phone: loginMethod === "phone" ? `+91${phone}` : undefined,
+        password,
+      });
+      saveAuthSession(session);
+      navigate("/parent-dashboard");
+    } catch (requestError) {
+      setError(requestError instanceof Error ? requestError.message : "Parent login failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -91,6 +106,8 @@ export default function ParentLogin() {
 
           {/* Login Form */}
           <div className="space-y-4">
+            {error && <p className="text-sm text-red-600">{error}</p>}
+
             {loginMethod === "email" ? (
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-[#004953]">Email Address</label>
@@ -154,14 +171,21 @@ export default function ParentLogin() {
 
             <Button
               onClick={handleLogin}
+              disabled={loading}
               className="w-full h-12 rounded-xl"
               style={{
                 background: "linear-gradient(135deg, #7B1E3A 0%, #A0002A 100%)",
                 color: "#FFFFFF"
               }}
             >
-              Login as Parent
+              {loading ? "Logging in..." : "Login as Parent"}
             </Button>
+
+            <div className="rounded-xl bg-[#FFF8E7] border border-[#D4AF37]/30 p-4 text-xs text-[#004953]/70">
+              <strong className="text-[#7B1E3A]">Demo parent:</strong><br />
+              Email: parent@no1shadi.com<br />
+              Password: parent123
+            </div>
           </div>
         </div>
 

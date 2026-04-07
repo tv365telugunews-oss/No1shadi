@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Home, Search, Heart, MessageCircle, User } from "lucide-react";
 
 export function BottomNav() {

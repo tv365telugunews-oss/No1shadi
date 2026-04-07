@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { ArrowLeft, Camera, Edit2, CheckCircle, Phone, Mail, MapPin, Briefcase, GraduationCap, Heart, Users, Star } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { BottomNav } from "../components/BottomNav";
 import { Button } from "../components/ui/button";
 import { Avatar } from "../components/ui/avatar";

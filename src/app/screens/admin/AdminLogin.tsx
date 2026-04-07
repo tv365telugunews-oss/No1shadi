@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 import { Shield, Mail, Lock, Eye, EyeOff, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
+import { loginAdmin, saveAuthSession } from "../../config/api";
 
 export default function AdminLogin() {
   const navigate = useNavigate();
@@ -12,13 +13,18 @@ export default function AdminLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
-  const handleLogin = () => {
-    // Demo credentials
-    if (email === "admin@no1shadi.com" && password === "admin123") {
-      localStorage.setItem("adminLoggedIn", "true");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    try {
+      setLoading(true);
+      const session = await loginAdmin({ email, password });
+      saveAuthSession(session);
       navigate("/admin/dashboard");
-    } else {
-      setError("Invalid credentials. Use admin@no1shadi.com / admin123");
+    } catch (requestError) {
+      setError(requestError instanceof Error ? requestError.message : "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -119,6 +125,7 @@ export default function AdminLogin() {
             {/* Login Button */}
             <Button
               onClick={handleLogin}
+              disabled={loading}
               className="w-full h-14 text-lg rounded-xl font-bold mt-6"
               style={{
                 background: "linear-gradient(135deg, #7B1E3A 0%, #A0002A 100%)",
@@ -126,7 +133,7 @@ export default function AdminLogin() {
                 boxShadow: "0 4px 16px rgba(123, 30, 58, 0.3)",
               }}
             >
-              Login to Admin Panel
+              {loading ? "Logging in..." : "Login to Admin Panel"}
               <ArrowRight className="w-5 h-5 ml-2" />
             </Button>
           </div>

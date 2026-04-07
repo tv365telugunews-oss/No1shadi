@@ -1,19 +1,19 @@
 import { motion } from "motion/react";
 import { Heart, Sparkles, ArrowRight, User, CheckCircle } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
+import { getAuthSession } from "../config/api";
 
 export default function WelcomeBack() {
   const navigate = useNavigate();
 
   const handleContinueToHome = () => {
-    // Check if user has completed profile
     const hasCompletedProfile = localStorage.getItem("profileCompleted");
+    const session = getAuthSession();
     
-    if (hasCompletedProfile === "true") {
+    if (hasCompletedProfile === "true" || session?.user.role === "user") {
       navigate("/home");
     } else {
-      // If profile not completed, go to registration/profile setup
       navigate("/registration");
     }
   };

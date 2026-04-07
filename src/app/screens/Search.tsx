@@ -1,7 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import { Search as SearchIcon, SlidersHorizontal, X } from "lucide-react";
-import { mockProfiles } from "../data/mockData";
+import { useEffect, useState } from "react";
+import { Search as SearchIcon, SlidersHorizontal } from "lucide-react";
 import ProfileCard from "../components/ProfileCard";
 import { BottomNav } from "../components/BottomNav";
 import { Button } from "../components/ui/button";
@@ -13,13 +11,55 @@ import { motion } from "motion/react";
 import { teluguCastes, getCasteDisplayName, getCasteValue } from "../data/castes";
 import { indianStates, getStateDisplayName, getStateValue } from "../data/states";
 import { indianReligions, getReligionDisplayName, getReligionValue } from "../data/religions";
-import { educationCourses, getEducationDisplayName, getEducationValue } from "../data/education";
-import { rashis, getRashiDisplayName, getRashiValue, nakshatrams, getNakshatramDisplayName, getNakshatramValue, gothrams, getGothramDisplayName, getGothramValue } from "../data/astrology";
+import { getProfiles, type ApiProfile } from "../config/api";
 
 export default function Search() {
   const [showFilters, setShowFilters] = useState(false);
   const [ageRange, setAgeRange] = useState([21, 35]);
-  const [heightRange, setHeightRange] = useState([150, 180]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedReligion, setSelectedReligion] = useState("all");
+  const [selectedCaste, setSelectedCaste] = useState("all");
+  const [selectedState, setSelectedState] = useState("all");
+  const [profiles, setProfiles] = useState<ApiProfile[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadProfiles() {
+      try {
+        setLoading(true);
+        setError("");
+        const data = await getProfiles({
+          q: searchQuery || undefined,
+          religion: selectedReligion !== "all" ? selectedReligion : undefined,
+          caste: selectedCaste !== "all" ? selectedCaste : undefined,
+          state: selectedState !== "all" ? selectedState : undefined,
+          minAge: ageRange[0],
+          maxAge: ageRange[1],
+        });
+
+        if (!ignore) {
+          setProfiles(data);
+        }
+      } catch (requestError) {
+        if (!ignore) {
+          setError(requestError instanceof Error ? requestError.message : "Failed to load profiles");
+        }
+      } finally {
+        if (!ignore) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadProfiles();
+
+    return () => {
+      ignore = true;
+    };
+  }, [searchQuery, selectedReligion, selectedCaste, selectedState, ageRange]);
   
   return (
     <div className="min-h-screen bg-[#FFF8E7] mandala-bg pb-20">
@@ -35,6 +75,8 @@ export default function Search() {
           <Input
             type="text"
             placeholder="Search by name, profession, location..."
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
             className="h-12 pl-12 pr-12 rounded-xl border-[#D4AF37]/30 bg-[#FFF8E7]"
           />
         </div>
@@ -76,25 +118,10 @@ export default function Search() {
                 />
               </div>
 
-              {/* Height Range */}
-              <div className="space-y-3">
-                <label className="text-sm font-semibold text-[#004953]">
-                  Height Range: {heightRange[0]}cm - {heightRange[1]}cm
-                </label>
-                <Slider
-                  value={heightRange}
-                  onValueChange={setHeightRange}
-                  min={140}
-                  max={200}
-                  step={1}
-                  className="w-full"
-                />
-              </div>
-
               {/* Religion */}
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-[#004953]">Religion</label>
-                <Select>
+                <Select value={selectedReligion} onValueChange={setSelectedReligion}>
                   <SelectTrigger className="h-12 rounded-xl border-[#D4AF37]/30 bg-white">
                     <SelectValue placeholder="Select religion" />
                   </SelectTrigger>
@@ -112,7 +139,7 @@ export default function Search() {
               {/* Caste */}
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-[#004953]">Caste</label>
-                <Select>
+                <Select value={selectedCaste} onValueChange={setSelectedCaste}>
                   <SelectTrigger className="h-12 rounded-xl border-[#D4AF37]/30 bg-white">
                     <SelectValue placeholder="Select caste" />
                   </SelectTrigger>
@@ -130,7 +157,7 @@ export default function Search() {
               {/* State */}
               <div className="space-y-2">
                 <label className="text-sm font-semibold text-[#004953]">State</label>
-                <Select>
+                <Select value={selectedState} onValueChange={setSelectedState}>
                   <SelectTrigger className="h-12 rounded-xl border-[#D4AF37]/30 bg-white">
                     <SelectValue placeholder="Select state" />
                   </SelectTrigger>
@@ -145,119 +172,19 @@ export default function Search() {
                 </Select>
               </div>
 
-              {/* Education */}
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-[#004953]">Education</label>
-                <Select>
-                  <SelectTrigger className="h-12 rounded-xl border-[#D4AF37]/30 bg-white">
-                    <SelectValue placeholder="Select education" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All</SelectItem>
-                    {educationCourses.map(course => (
-                      <SelectItem key={getEducationValue(course)} value={getEducationValue(course)}>
-                        {getEducationDisplayName(course)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Income */}
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-[#004953]">Annual Income</label>
-                <Select>
-                  <SelectTrigger className="h-12 rounded-xl border-[#D4AF37]/30 bg-white">
-                    <SelectValue placeholder="Select income range" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All</SelectItem>
-                    <SelectItem value="3-5">₹3-5 Lakhs</SelectItem>
-                    <SelectItem value="5-8">₹5-8 Lakhs</SelectItem>
-                    <SelectItem value="8-12">₹8-12 Lakhs</SelectItem>
-                    <SelectItem value="12-15">₹12-15 Lakhs</SelectItem>
-                    <SelectItem value="15+">₹15+ Lakhs</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Rashi */}
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-[#004953]">Rashi</label>
-                <Select>
-                  <SelectTrigger className="h-12 rounded-xl border-[#D4AF37]/30 bg-white">
-                    <SelectValue placeholder="Select rashi" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All</SelectItem>
-                    {rashis.map(rashi => (
-                      <SelectItem key={getRashiValue(rashi)} value={getRashiValue(rashi)}>
-                        {getRashiDisplayName(rashi)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Nakshatram */}
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-[#004953]">Nakshatram</label>
-                <Select>
-                  <SelectTrigger className="h-12 rounded-xl border-[#D4AF37]/30 bg-white">
-                    <SelectValue placeholder="Select nakshatram" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All</SelectItem>
-                    {nakshatrams.map(nakshatram => (
-                      <SelectItem key={getNakshatramValue(nakshatram)} value={getNakshatramValue(nakshatram)}>
-                        {getNakshatramDisplayName(nakshatram)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Gothram */}
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-[#004953]">Gothram</label>
-                <Select>
-                  <SelectTrigger className="h-12 rounded-xl border-[#D4AF37]/30 bg-white">
-                    <SelectValue placeholder="Select gothram" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All</SelectItem>
-                    {gothrams.map(gothram => (
-                      <SelectItem key={getGothramValue(gothram)} value={getGothramValue(gothram)}>
-                        {getGothramDisplayName(gothram)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              {/* Employment Type */}
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-[#004953]">Employment Type</label>
-                <Select>
-                  <SelectTrigger className="h-12 rounded-xl border-[#D4AF37]/30 bg-white">
-                    <SelectValue placeholder="Select employment type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All</SelectItem>
-                    <SelectItem value="private">Private Sector</SelectItem>
-                    <SelectItem value="government">Government</SelectItem>
-                    <SelectItem value="business">Business</SelectItem>
-                    <SelectItem value="self">Self Employed</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
             </div>
 
             {/* Filter Actions */}
             <div className="absolute bottom-0 left-0 right-0 bg-white border-t border-[#D4AF37]/20 p-4 flex gap-3">
               <Button
                 variant="outline"
-                onClick={() => setShowFilters(false)}
+                onClick={() => {
+                  setSelectedReligion("all");
+                  setSelectedCaste("all");
+                  setSelectedState("all");
+                  setAgeRange([21, 35]);
+                  setShowFilters(false);
+                }}
                 className="flex-1 h-12 rounded-xl border-[#D4AF37]"
               >
                 Clear All
@@ -281,7 +208,7 @@ export default function Search() {
       <div className="p-4">
         <div className="flex items-center justify-between mb-4">
           <p className="text-sm text-[#004953]/60">
-            Showing {mockProfiles.length} profiles
+            Showing {profiles.length} profiles
           </p>
           <Select defaultValue="compatibility">
             <SelectTrigger className="w-40 h-10 rounded-xl border-[#D4AF37]/30 bg-white text-sm">
@@ -295,15 +222,31 @@ export default function Search() {
           </Select>
         </div>
 
+        {loading && <p className="text-sm text-[#004953]/60">Loading matches...</p>}
+        {error && <p className="text-sm text-red-600 mb-4">{error}</p>}
+
         <div className="space-y-4">
-          {mockProfiles.map((profile, index) => (
+          {profiles.map((profile, index) => (
             <motion.div
               key={profile.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
             >
-              <ProfileCard profile={profile} variant="horizontal" />
+              <ProfileCard
+                profile={{
+                  id: profile.id,
+                  name: profile.name,
+                  age: profile.age,
+                  height: profile.height,
+                  location: profile.location,
+                  profession: profile.profession,
+                  verified: profile.verified,
+                  compatibility: profile.compatibility,
+                  image: profile.image || profile.photo,
+                }}
+                variant="horizontal"
+              />
             </motion.div>
           ))}
         </div>

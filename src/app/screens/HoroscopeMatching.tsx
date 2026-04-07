@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Star, CheckCircle, AlertCircle, Sparkles } from "lucide-react";
 import { Button } from "../components/ui/button";
 

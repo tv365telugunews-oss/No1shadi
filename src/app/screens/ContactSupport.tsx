@@ -6,6 +6,7 @@ import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../components/ui/select";
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle } from "../components/ui/alert-dialog";
+import { submitSupportTicket } from "../config/api";
 
 const issueCategories = [
   "Account & Login",
@@ -21,6 +22,7 @@ const issueCategories = [
 export default function ContactSupport() {
   const navigate = useNavigate();
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   
   const [formData, setFormData] = useState({
     name: "",
@@ -85,17 +87,27 @@ export default function ContactSupport() {
     return isValid;
   };
 
-  const handleSubmit = () => {
-    if (validateForm()) {
-      // In a real app, you would send this to your API
-      console.log("Support request submitted:", formData);
-      
+  const handleSubmit = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
+    try {
+      setSubmitting(true);
+      await submitSupportTicket(formData);
       setShowSuccessDialog(true);
-      
+
       setTimeout(() => {
         setShowSuccessDialog(false);
         navigate(-1);
       }, 2500);
+    } catch (requestError) {
+      setErrors((current) => ({
+        ...current,
+        message: requestError instanceof Error ? requestError.message : "Failed to submit request",
+      }));
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -181,6 +193,7 @@ export default function ContactSupport() {
           </div>
 
           <div className="mt-3">
+            {errors.message && <p className="mb-2 text-sm text-red-600">{errors.message}</p>}
             <Input
               placeholder="Subject"
               value={formData.subject}
@@ -195,9 +208,9 @@ export default function ContactSupport() {
           </div>
 
           <div className="mt-4 flex items-center gap-3">
-            <Button onClick={handleSubmit} className="flex items-center gap-2">
+            <Button onClick={handleSubmit} className="flex items-center gap-2" disabled={submitting}>
               <Send className="w-4 h-4" />
-              Send Request
+              {submitting ? "Sending..." : "Send Request"}
             </Button>
             <Button variant="outline" onClick={() => navigate(-1)}>
               Cancel

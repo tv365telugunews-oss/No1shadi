@@ -1,11 +1,43 @@
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
 import { useNavigate } from "react-router-dom";
 import { Check, Crown, Sparkles, ChevronLeft } from "lucide-react";
-import { subscriptionPlans } from "../data/mockData";
 import { Button } from "../components/ui/button";
+import { formatCurrency, getSubscriptionPlans, type SubscriptionPlan } from "../config/api";
 
 export default function Subscription() {
   const navigate = useNavigate();
+  const [plans, setPlans] = useState<SubscriptionPlan[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadPlans() {
+      try {
+        setLoading(true);
+        const data = await getSubscriptionPlans();
+        if (!ignore) {
+          setPlans(data);
+        }
+      } catch (requestError) {
+        if (!ignore) {
+          setError(requestError instanceof Error ? requestError.message : "Failed to load plans");
+        }
+      } finally {
+        if (!ignore) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadPlans();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#FFF8E7] mandala-bg pb-6">
@@ -41,7 +73,9 @@ export default function Subscription() {
       </div>
 
       <div className="px-4 space-y-4">
-        {subscriptionPlans.map((plan, index) => (
+        {loading && <p className="text-sm text-[#004953]/60">Loading subscription plans...</p>}
+        {error && <p className="text-sm text-red-600">{error}</p>}
+        {plans.map((plan, index) => (
           <PlanCard key={plan.id} plan={plan} index={index} />
         ))}
       </div>
@@ -94,19 +128,20 @@ export default function Subscription() {
 }
 
 interface PlanCardProps {
-  plan: typeof subscriptionPlans[0];
+  plan: SubscriptionPlan;
   index: number;
 }
 
 function PlanCard({ plan, index }: PlanCardProps) {
   const navigate = useNavigate();
-  const isCustomPricing = plan.price === "Contact Us";
+  const isCustomPricing = plan.price == null;
 
   const handleSubscribe = () => {
     if (isCustomPricing) {
       window.location.href = "tel:+919100810606";
     } else {
-      alert(`Proceeding to subscribe to ${plan.name} for ${plan.price}`);
+      localStorage.setItem("selectedPlanForPayment", JSON.stringify(plan));
+      navigate("/payment");
     }
   };
 
@@ -119,9 +154,9 @@ function PlanCard({ plan, index }: PlanCardProps) {
             <p className="text-sm text-[#004953]/60">{plan.duration}</p>
           </div>
           <div className="text-right">
-            <div className="text-xl font-bold text-[#7B1E3A]">{plan.price}</div>
-            {plan.originalPrice && (
-              <div className="text-xs line-through text-[#004953]/50">{plan.originalPrice}</div>
+            <div className="text-xl font-bold text-[#7B1E3A]">{formatCurrency(plan.price)}</div>
+            {plan.originalPrice != null && (
+              <div className="text-xs line-through text-[#004953]/50">{formatCurrency(plan.originalPrice)}</div>
             )}
             {plan.discount && (
               <div className="text-xs text-[#D4AF37] font-semibold">{plan.discount}</div>
@@ -143,7 +178,7 @@ function PlanCard({ plan, index }: PlanCardProps) {
             onClick={handleSubscribe}
             className="flex-1 h-10 rounded-lg bg-[#7B1E3A] text-white font-semibold hover:bg-[#A0002A] transition-colors"
           >
-            {isCustomPricing ? 'Contact Us' : `Subscribe - ${plan.price}`}
+            {isCustomPricing ? 'Contact Us' : `Subscribe - ${formatCurrency(plan.price)}`}
           </button>
           <button
             onClick={() => navigate(-1)}

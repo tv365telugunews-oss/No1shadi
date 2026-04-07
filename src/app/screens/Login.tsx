@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   Mail,
@@ -13,6 +13,7 @@ import {
 
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
+import { loginUser, saveAuthSession } from "../config/api";
 
 type LoginMethod = "email" | "mobile" | "google" | null;
 
@@ -26,10 +27,25 @@ export default function Login() {
   const [mobile, setMobile] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleEmailLogin = () => {
-    if (email && password) {
+  const handleEmailLogin = async () => {
+    if (!email || !password) {
+      setError("Email and password are required");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setError("");
+      const session = await loginUser({ email, password });
+      saveAuthSession(session);
       navigate("/welcome-back");
+    } catch (requestError) {
+      setError(requestError instanceof Error ? requestError.message : "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -150,11 +166,16 @@ export default function Login() {
         </button>
 
         <div className="space-y-6">
+          {error && <p className="text-sm text-red-600">{error}</p>}
+
           <Input
             type="email"
             placeholder="Email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              setError("");
+            }}
           />
 
           <div className="relative">
@@ -162,7 +183,10 @@ export default function Login() {
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                setError("");
+              }}
             />
 
             <button
@@ -173,9 +197,15 @@ export default function Login() {
             </button>
           </div>
 
-          <Button onClick={handleEmailLogin} className="w-full h-14">
-            Login <ArrowRight className="ml-2" />
+          <Button onClick={handleEmailLogin} className="w-full h-14" disabled={loading}>
+            {loading ? "Logging in..." : "Login"} <ArrowRight className="ml-2" />
           </Button>
+
+          <div className="rounded-xl bg-[#FFF8E7] border border-[#D4AF37]/30 p-4 text-xs text-[#004953]/70">
+            <strong className="text-[#7B1E3A]">Demo user:</strong><br />
+            Email: priya.sharma@example.com<br />
+            Password: password123
+          </div>
         </div>
       </div>
     );

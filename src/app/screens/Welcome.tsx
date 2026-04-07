@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Heart, Shield, Sparkles, ArrowRight } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import logoImage from "../../assets/welcome.png.png";
 

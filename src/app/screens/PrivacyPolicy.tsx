@@ -1,5 +1,5 @@
 import { ArrowLeft, Shield, Lock, Eye, Database, UserCheck, Bell } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { BottomNav } from "../components/BottomNav";
 
 export default function PrivacyPolicy() {

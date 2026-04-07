@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ArrowLeft, Check } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 
 const languages = [

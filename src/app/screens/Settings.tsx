@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { 
   ChevronLeft, ChevronRight, User, Shield, Bell, Lock, 
   HelpCircle, LogOut, Eye, Globe, Heart, FileText, Scale, AlertTriangle, UtensilsCrossed, GraduationCap

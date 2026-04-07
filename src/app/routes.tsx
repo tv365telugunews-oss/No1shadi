@@ -1,4 +1,6 @@
-import { createBrowserRouter } from "react-router-dom";
+import type { ComponentType } from "react";
+import { Navigate, createBrowserRouter } from "react-router-dom";
+import { getAuthSession } from "./config/api";
 
 import Welcome from "./screens/Welcome";
 import Login from "./screens/Login";
@@ -59,6 +61,48 @@ import ContentManagement from "./screens/admin/ContentManagement";
 import AdminSettings from "./screens/admin/AdminSettings";
 
 /* 404 Page */
+type AppRole = "user" | "parent" | "admin";
+
+function getDefaultPathForRole(role: AppRole) {
+  if (role === "admin") {
+    return "/admin/dashboard";
+  }
+
+  if (role === "parent") {
+    return "/parent-dashboard";
+  }
+
+  return "/home";
+}
+
+function withAuthGuard(Screen: ComponentType, allowedRoles?: AppRole[]) {
+  return function GuardedScreen() {
+    const session = getAuthSession();
+
+    if (!session) {
+      return <Navigate to="/login" replace />;
+    }
+
+    if (allowedRoles && !allowedRoles.includes(session.user.role)) {
+      return <Navigate to={getDefaultPathForRole(session.user.role)} replace />;
+    }
+
+    return <Screen />;
+  };
+}
+
+function withPublicOnlyGuard(Screen: ComponentType) {
+  return function PublicOnlyScreen() {
+    const session = getAuthSession();
+
+    if (session) {
+      return <Navigate to={getDefaultPathForRole(session.user.role)} replace />;
+    }
+
+    return <Screen />;
+  };
+}
+
 function NotFound() {
   return (
     <div className="min-h-screen bg-[#FFF8E7] flex items-center justify-center p-6">
@@ -78,41 +122,48 @@ function NotFound() {
 
 export const router = createBrowserRouter([
   { path: "/", Component: Welcome },
-  { path: "/login", Component: Login },
+  { path: "/login", Component: withPublicOnlyGuard(Login) },
   { path: "/welcome-back", Component: WelcomeBack },
   { path: "/phone-number-entry", Component: PhoneNumberEntry },
   { path: "/registration", Component: Registration },
   { path: "/otp-verification", Component: OTPVerification },
   { path: "/selfie-upload", Component: SelfieUpload },
-  { path: "/home", Component: Home },
-  { path: "/search", Component: Search },
-  { path: "/profile/:id", Component: ProfileDetail },
-  { path: "/subscription", Component: Subscription },
-  { path: "/settings", Component: Settings },
-  { path: "/payment", Component: Payment },
-  { path: "/chat", Component: Chat },
-  { path: "/profile", Component: Profile },
-  { path: "/favorites", Component: Favorites },
-  { path: "/notifications", Component: Notifications },
-  { path: "/edit-profile", Component: EditProfile },
+  { path: "/home", Component: withAuthGuard(Home, ["user"]) },
+  { path: "/search", Component: withAuthGuard(Search, ["user"]) },
+  { path: "/profile/:id", Component: withAuthGuard(ProfileDetail, ["user"]) },
+  { path: "/subscription", Component: withAuthGuard(Subscription, ["user"]) },
+  { path: "/settings", Component: withAuthGuard(Settings, ["user", "parent", "admin"]) },
+  { path: "/payment", Component: withAuthGuard(Payment, ["user"]) },
+  { path: "/chat", Component: withAuthGuard(Chat, ["user"]) },
+  { path: "/profile", Component: withAuthGuard(Profile, ["user"]) },
+  { path: "/favorites", Component: withAuthGuard(Favorites, ["user"]) },
+  { path: "/notifications", Component: withAuthGuard(Notifications, ["user"]) },
+  { path: "/edit-profile", Component: withAuthGuard(EditProfile, ["user"]) },
   { path: "/terms", Component: TermsAndConditions },
   { path: "/privacy", Component: PrivacyPolicy },
   { path: "/disclaimer", Component: LegalDisclaimer },
-  { path: "/language", Component: Language },
-  { path: "/blocked-users", lazy: async () => { const m = await import("./screens/BlockedUsers"); return { Component: (m && (m as any).default) ? (m as any).default : ((m && (m as any).BlockedUsers) ? (m as any).BlockedUsers : m) }; } },
-  { path: "/change-password", Component: ChangePassword },
+  { path: "/language", Component: withAuthGuard(Language, ["user", "parent", "admin"]) },
+  {
+    path: "/blocked-users",
+    lazy: async () => {
+      const m = await import("./screens/BlockedUsers");
+      const Screen = (m && (m as any).default) ? (m as any).default : ((m && (m as any).BlockedUsers) ? (m as any).BlockedUsers : m);
+      return { Component: withAuthGuard(Screen, ["user"]) };
+    },
+  },
+  { path: "/change-password", Component: withAuthGuard(ChangePassword, ["user", "parent", "admin"]) },
   { path: "/help-faq", Component: HelpFAQ },
-  { path: "/contact-support", Component: ContactSupport },
-  { path: "/hobbies", Component: Hobbies },
-  { path: "/profile-verification", Component: ProfileVerification },
-  { path: "/eating-habits", Component: EatingHabits },
-  { path: "/education-details", Component: EducationDetails },
+  { path: "/contact-support", Component: withAuthGuard(ContactSupport, ["user", "parent"]) },
+  { path: "/hobbies", Component: withAuthGuard(Hobbies, ["user"]) },
+  { path: "/profile-verification", Component: withAuthGuard(ProfileVerification, ["user"]) },
+  { path: "/eating-habits", Component: withAuthGuard(EatingHabits, ["user"]) },
+  { path: "/education-details", Component: withAuthGuard(EducationDetails, ["user"]) },
 
   /* Advanced Features */
-  { path: "/horoscope-matching", Component: HoroscopeMatching },
-  { path: "/video-call", Component: VideoCall },
-  { path: "/parent-login", Component: ParentLogin },
-  { path: "/parent-dashboard", Component: ParentDashboard },
+  { path: "/horoscope-matching", Component: withAuthGuard(HoroscopeMatching, ["user"]) },
+  { path: "/video-call", Component: withAuthGuard(VideoCall, ["user"]) },
+  { path: "/parent-login", Component: withPublicOnlyGuard(ParentLogin) },
+  { path: "/parent-dashboard", Component: withAuthGuard(ParentDashboard, ["parent"]) },
 
   /* Wedding Marketplace */
   { path: "/wedding-marketplace", Component: WeddingMarketplace },
@@ -121,20 +172,20 @@ export const router = createBrowserRouter([
   { path: "/vendor-booking/:id", Component: VendorBooking },
 
   /* AI Planner */
-  { path: "/wedding-planner", Component: WeddingPlanner },
-  { path: "/budget-manager", Component: BudgetManager },
-  { path: "/guest-manager", Component: GuestManager },
+  { path: "/wedding-planner", Component: withAuthGuard(WeddingPlanner, ["user", "parent"]) },
+  { path: "/budget-manager", Component: withAuthGuard(BudgetManager, ["user", "parent"]) },
+  { path: "/guest-manager", Component: withAuthGuard(GuestManager, ["user", "parent"]) },
 
   /* Admin */
-  { path: "/admin/login", Component: AdminLogin },
-  { path: "/admin/dashboard", Component: AdminDashboard },
-  { path: "/admin/user-management", Component: UserManagement },
-  { path: "/admin/verification-queue", Component: VerificationQueue },
-  { path: "/admin/subscription-management", Component: SubscriptionManagement },
-  { path: "/admin/analytics", Component: Analytics },
-  { path: "/admin/support-tickets", Component: SupportTickets },
-  { path: "/admin/content-management", Component: ContentManagement },
-  { path: "/admin/settings", Component: AdminSettings },
+  { path: "/admin/login", Component: withPublicOnlyGuard(AdminLogin) },
+  { path: "/admin/dashboard", Component: withAuthGuard(AdminDashboard, ["admin"]) },
+  { path: "/admin/user-management", Component: withAuthGuard(UserManagement, ["admin"]) },
+  { path: "/admin/verification-queue", Component: withAuthGuard(VerificationQueue, ["admin"]) },
+  { path: "/admin/subscription-management", Component: withAuthGuard(SubscriptionManagement, ["admin"]) },
+  { path: "/admin/analytics", Component: withAuthGuard(Analytics, ["admin"]) },
+  { path: "/admin/support-tickets", Component: withAuthGuard(SupportTickets, ["admin"]) },
+  { path: "/admin/content-management", Component: withAuthGuard(ContentManagement, ["admin"]) },
+  { path: "/admin/settings", Component: withAuthGuard(AdminSettings, ["admin"]) },
 
   { path: "*", Component: NotFound },
 ]);

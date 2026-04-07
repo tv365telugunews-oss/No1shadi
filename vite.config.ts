@@ -17,15 +17,21 @@ export default defineConfig({
     },
   },
 
+  preview: {
+    // Allow the Render host for preview requests
+    allowedHosts: ['gst-today.onrender.com'],
+  },
+
   // File types to support raw imports. Never add .css, .tsx, or .ts files to this.
   assetsInclude: ['**/*.svg', '**/*.csv'],
   optimizeDeps: {
-    include: ['react-router-dom', 'react-router'],
+    include: ['react-router-dom'],
   },
 
   build: {
     commonjsOptions: {
       include: [/node_modules/],
+      exclude: [/react-router/],
       transformMixedEsModules: true,
     },
   },

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Star, MapPin, Phone, Mail, Globe, Heart, Share2, Calendar, CheckCircle, Clock, Users, IndianRupee } from "lucide-react";
 import { Button } from "../components/ui/button";
 

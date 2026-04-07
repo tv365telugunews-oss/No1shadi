@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "motion/react";
 import {
   Users,
@@ -20,17 +20,56 @@ import {
   MessageSquare,
   Flag,
 } from "lucide-react";
+import { clearAuthSession, getAdminDashboard, type AdminDashboardData } from "../../config/api";
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [dashboard, setDashboard] = useState<AdminDashboardData | null>(null);
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadDashboard() {
+      try {
+        setLoading(true);
+        const data = await getAdminDashboard();
+        if (!ignore) {
+          setDashboard(data);
+        }
+      } catch (requestError) {
+        if (!ignore) {
+          setError(requestError instanceof Error ? requestError.message : "Failed to load dashboard");
+        }
+      } finally {
+        if (!ignore) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadDashboard();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem("adminLoggedIn");
+    clearAuthSession();
     navigate("/admin/login");
   };
 
-  const stats = [
+  const statIconMap: Record<string, any> = {
+    "Total Users": Users,
+    "Active Subscriptions": CheckCircle,
+    "Revenue (Total)": DollarSign,
+    "Pending Verifications": AlertCircle,
+  };
+
+  const stats = dashboard?.stats || [
     {
       title: "Total Users",
       value: "15,234",
@@ -86,21 +125,21 @@ export default function AdminDashboard() {
       title: "User Management",
       description: "View and manage all users",
       icon: Users,
-      route: "/admin/users",
+      route: "/admin/user-management",
       color: "#7B1E3A",
     },
     {
       title: "Verification Queue",
       description: "Approve pending profiles",
       icon: UserCheck,
-      route: "/admin/verifications",
+      route: "/admin/verification-queue",
       color: "#00A86B",
     },
     {
       title: "Subscriptions",
       description: "Manage plans & payments",
       icon: CreditCard,
-      route: "/admin/subscriptions",
+      route: "/admin/subscription-management",
       color: "#D4AF37",
     },
     {
@@ -114,19 +153,19 @@ export default function AdminDashboard() {
       title: "Content Management",
       description: "Manage app content",
       icon: FileText,
-      route: "/admin/content",
+      route: "/admin/content-management",
       color: "#7B1E3A",
     },
     {
       title: "Support Tickets",
       description: "Handle user queries",
       icon: MessageSquare,
-      route: "/admin/support",
+      route: "/admin/support-tickets",
       color: "#FFA500",
     },
   ];
 
-  const recentActivities = [
+  const recentActivities = (dashboard?.recentActivities || [
     {
       type: "user",
       message: "New user registration: Priya Sharma",
@@ -162,7 +201,29 @@ export default function AdminDashboard() {
       icon: CreditCard,
       color: "#D4AF37",
     },
-  ];
+  ]).map((activity) => ({
+    ...activity,
+    icon:
+      activity.type === "payment"
+        ? DollarSign
+        : activity.type === "support"
+          ? MessageSquare
+          : activity.type === "verification"
+            ? CheckCircle
+            : activity.type === "report"
+              ? Flag
+              : Users,
+    color:
+      activity.type === "payment"
+        ? "#00A86B"
+        : activity.type === "support"
+          ? "#FFA500"
+          : activity.type === "verification"
+            ? "#00A86B"
+            : activity.type === "report"
+              ? "#FF4444"
+              : "#7B1E3A",
+  }));
 
   return (
     <div className="min-h-screen bg-[#FFF8E7]">
@@ -227,6 +288,8 @@ export default function AdminDashboard() {
             Welcome back, Admin
           </h2>
           <p className="text-[#004953]/70">Here's what's happening with No1 shadi.com today</p>
+          {loading && <p className="text-sm text-[#004953]/60 mt-2">Loading dashboard...</p>}
+          {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
         </motion.div>
 
         {/* Stats Grid */}
@@ -249,7 +312,10 @@ export default function AdminDashboard() {
                   className="p-3 rounded-xl"
                   style={{ backgroundColor: stat.color }}
                 >
-                  <stat.icon className="w-6 h-6 text-white" />
+                  {(() => {
+                    const Icon = (stat as any).icon || statIconMap[stat.title] || Users;
+                    return <Icon className="w-6 h-6 text-white" />;
+                  })()}
                 </div>
                 <span
                   className={`text-sm font-bold ${

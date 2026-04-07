@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Calendar, CheckSquare, DollarSign, Users, Download, Share2, Sparkles, Plus } from "lucide-react";
 import { Button } from "../components/ui/button";
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, MapPin, Star, TrendingUp, Filter, Heart, Share2, Phone, MessageCircle, IndianRupee, SlidersHorizontal, Search } from "lucide-react";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";

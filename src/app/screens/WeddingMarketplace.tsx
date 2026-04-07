@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { Search, MapPin, Star, Heart, ChevronRight, Camera, Utensils, Music, Palette, Gift, Car, Home, Phone, X } from "lucide-react";
 import { Input } from "../components/ui/input";
 

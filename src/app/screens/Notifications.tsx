@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowLeft, Heart, MessageCircle, CheckCircle, Star, Eye, Clock } from "lucide-react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { BottomNav } from "../components/BottomNav";
 import { Avatar } from "../components/ui/avatar";
 
